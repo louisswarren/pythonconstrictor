@@ -4,12 +4,15 @@ def RETR(*k): return PC['.'.join(k)]
 def STORE(v, *k): PC['.'.join(k)] = v
 
 
-def naturals():
-    RT = 'naturals'
-    STORE(1, RT, 'n')
+def LINE2(RT): STORE(1, RT, 'n');
+
+def LINE4(RT): return RETR(RT, 'n')
+def LINE5(RT): STORE(RETR(RT, 'n') + 1, RT, 'n')
+
+def naturals(RT = 'naturals'):
+    LINE2(RT)
     while True:
-        yield RETR(RT, 'n')
-        STORE(RETR(RT, 'n') + 1, RT, 'n')
+        yield LINE4(RT); LINE5(RT)
 
 def primes():
     prev_primes = set()
